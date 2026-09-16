@@ -1,3 +1,36 @@
+// --- SYSTÈME DE CONNEXION (BARRIÈRE FRONT-END) ---
+const CORRECT_PASSWORD = "Radar-HW-2026!M&A"; // Le mot de passe en dur (vulnérable si on lit le code source)
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginOverlay = document.getElementById('login-overlay');
+    const mainApp = document.getElementById('main-app');
+    const btnLogin = document.getElementById('btn-login');
+    const passwordInput = document.getElementById('password-input');
+    const loginError = document.getElementById('login-error');
+
+    // Vérifie si l'utilisateur est déjà connecté dans cette session
+    if (sessionStorage.getItem('hw_radar_auth') === 'true') {
+        loginOverlay.style.display = 'none';
+        mainApp.classList.remove('dashboard-hidden');
+    }
+
+    function checkPassword() {
+        if (passwordInput.value === CORRECT_PASSWORD) {
+            sessionStorage.setItem('hw_radar_auth', 'true'); // Sauvegarde la session
+            loginOverlay.style.display = 'none';
+            mainApp.classList.remove('dashboard-hidden');
+        } else {
+            loginError.style.display = 'block';
+            passwordInput.value = '';
+        }
+    }
+
+    btnLogin.addEventListener('click', checkPassword);
+    passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') checkPassword();
+    });
+});
+
 const baseFeeds = [
     'https://www.pv-magazine.fr/feed/', 
     'https://energynews.pro/fr/feed/',
