@@ -199,10 +199,10 @@ function startSearch(type) {
                 checkIfDone(); 
             };
             
-            script.src = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}&callback=${callbackName}`;
+            script.src = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}&api_key=7hx3axa9vy3wvqrkbagpoehv4odhxnafyslmpidn&callback=${callbackName}`;
             document.body.appendChild(script);
 
-        }, index * 500); 
+        }, index * 200); 
     });
 }
 
