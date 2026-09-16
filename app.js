@@ -44,7 +44,7 @@ const baseFeeds = [
 ];
 
 const feeds = [];
-const profondeur = 5; 
+const profondeur = 10; 
 
 baseFeeds.forEach(url => {
     for (let i = 1; i <= profondeur; i++) {
