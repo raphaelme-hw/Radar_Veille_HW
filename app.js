@@ -202,7 +202,7 @@ function startSearch(type) {
             script.src = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}&callback=${callbackName}`;
             document.body.appendChild(script);
 
-        }, index * 300); 
+        }, index * 500); 
     });
 }
 
