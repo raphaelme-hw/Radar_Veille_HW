@@ -44,7 +44,7 @@ const baseFeeds = [
 ];
 
 const feeds = [];
-const profondeur = 10; 
+const profondeur = 5; 
 
 baseFeeds.forEach(url => {
     for (let i = 1; i <= profondeur; i++) {
@@ -202,7 +202,7 @@ function startSearch(type) {
             script.src = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}&api_key=7hx3axa9vy3wvqrkbagpoehv4odhxnafyslmpidn&callback=${callbackName}`;
             document.body.appendChild(script);
 
-        }, index * 200); 
+        }, index * 1000); 
     });
 }
 
