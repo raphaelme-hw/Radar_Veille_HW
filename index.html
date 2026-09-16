@@ -10,7 +10,16 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <div class="dashboard-container">
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-box">
+            <h2>Radar <span>Hello Watt</span></h2>
+            <p>Accès restreint. Veuillez vous identifier.</p>
+            <input type="password" id="password-input" placeholder="Mot de passe...">
+            <button id="btn-login" class="btn btn-primary">Accéder à l'outil</button>
+            <p id="login-error" style="color: red; display: none; margin-top: 15px; font-size: 14px;">Mot de passe incorrect.</p>
+        </div>
+    </div>
+    <div id="main-app" class="dashboard-container dashboard-hidden">
         <header class="header">
             <div class="logo-area">
                 <h1>Radar Veille <span>Hello Watt</span></h1>
