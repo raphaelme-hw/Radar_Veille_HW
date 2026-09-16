@@ -1,0 +1,237 @@
+:root {
+    --primary-color: #00A3E0; /* Bleu inspiré Hello Watt */
+    --primary-hover: #0082b3;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --bg-page: #f3f4f6;
+    --bg-card: #ffffff;
+    --border-color: #e5e7eb;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    margin: 0;
+    padding: 30px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+.logo-area h1 {
+    margin: 0 0 5px 0;
+    font-size: 24px;
+    color: var(--text-main);
+}
+
+.logo-area h1 span {
+    color: var(--primary-color);
+}
+
+.logo-area p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.modern-select {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-card);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-main);
+    cursor: pointer;
+    outline: none;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-primary { background-color: var(--primary-color); color: white; }
+.btn-primary:hover { background-color: var(--primary-hover); }
+
+.btn-secondary { background-color: #10b981; color: white; }
+.btn-secondary:hover { background-color: #059669; }
+
+.btn-ghost { background-color: #e5e7eb; color: var(--text-main); }
+.btn-ghost:hover { background-color: #d1d5db; }
+
+.loading-state {
+    text-align: center;
+    padding: 20px;
+    color: var(--primary-color);
+    font-weight: 500;
+    background: var(--bg-card);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.table-container {
+    background: var(--bg-card);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover { background-color: #f9fafb; }
+
+.date-cell { font-size: 14px; color: var(--text-muted); }
+
+.entity-cell { font-weight: 600; color: var(--text-main); }
+.entity-empty { color: #9ca3af; font-weight: normal; }
+
+.amount-cell { font-weight: 600; color: var(--primary-color); }
+
+.source-badge {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+    margin-right: 8px;
+}
+.source-badge:hover { text-decoration: underline; }
+
+.article-title { font-size: 14px; color: var(--text-main); }
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+.badge-solaire { background-color: #f59e0b; }
+.badge-renovation { background-color: #10b981; }
+.badge-batterie { background-color: #ef4444; }
+.badge-flexibilite { background-color: #8b5cf6; }
+.badge-energie { background-color: #0284c7; }
+.badge-autre { background-color: #9ca3af; }
+
+/* Nouveau bouton Outline */
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+}
+.btn-outline:hover {
+    background-color: #f9fafb;
+}
+
+/* Style de la fenêtre Modale */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.6); 
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    margin: 4% auto; 
+    padding: 40px;
+    border-radius: 12px;
+    width: 80%; 
+    max-width: 800px; 
+    max-height: 80vh; 
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.close-modal {
+    color: var(--text-muted);
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-modal:hover { color: var(--text-main); }
+
+/* Mise en forme du texte Markdown converti */
+.markdown-body {
+    line-height: 1.6;
+    color: var(--text-main);
+}
+.markdown-body h1 {
+    font-size: 24px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.markdown-body h2 {
+    font-size: 18px;
+    color: var(--primary-color);
+    margin-top: 30px;
+}
+.markdown-body h3 {
+    font-size: 16px;
+    margin-top: 25px;
+}
+.markdown-body ul {
+    padding-left: 20px;
+}
+.markdown-body li {
+    margin-bottom: 8px;
+}
