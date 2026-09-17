@@ -1,26 +1,24 @@
 const fs = require('fs');
 const Parser = require('rss-parser');
 
-// NOUVEAU : On configure le parseur pour se déguiser en vrai navigateur et avoir un minuteur de 10s
+// On simplifie le déguisement pour ne plus bloquer GreenUnivers
 const parser = new Parser({
   timeout: 10000,
   headers: {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept': 'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.1'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
   }
 });
 
 const baseFeeds = [
     'https://www.pv-magazine.fr/feed/', 
-    // Attention : Vérifier les URL suivantes directement dans un navigateur, elles semblent obsolètes
-    'https://energynews.pro/fr/feed/',
+    'https://energynews.pro/feed/',
     'https://www.maddyness.com/feed/',
     'https://www.greenunivers.com/feed/',
-    'https://techcrunch.com/category/greentech/feed/', 
+    'https://techcrunch.com/category/climate/feed/', // <-- Mise à jour du lien (greentech n'existe plus)
     'https://sifted.eu/feed/',
-    'https://www.lesechos.fr/rss/tech-medias',
+    // 'https://www.lesechos.fr/rss/tech-medias', <-- Désactivé temporairement (bloque GitHub)
     'https://cleantechnica.com/feed/',
-    'https://www.transition-energies.com/feed/'
+    // 'https://www.transition-energies.com/feed/' <-- Désactivé temporairement (bloque GitHub)
 ];
 
 const profondeur = 3; 
