@@ -149,6 +149,7 @@ async function scrapeFeeds() {
     allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
     fs.writeFileSync(DATA_FILE, JSON.stringify(allArticles, null, 2));
     console.log(`Mise à jour terminée. ${nouveauxArticles} nouveaux articles ajoutés.`);
+  process.exit(0);
 }
 
 scrapeFeeds();
