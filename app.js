@@ -1,5 +1,5 @@
 // --- SYSTÈME DE CONNEXION (BARRIÈRE FRONT-END) ---
-const CORRECT_PASSWORD = "Radar-HW-2026!M&A"; // Le mot de passe en dur (vulnérable si on lit le code source)
+const CORRECT_PASSWORD = "Radar-HW-2026!M&A"; 
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginOverlay = document.getElementById('login-overlay');
@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('password-input');
     const loginError = document.getElementById('login-error');
 
-    // Vérifie si l'utilisateur est déjà connecté dans cette session
     if (sessionStorage.getItem('hw_radar_auth') === 'true') {
         loginOverlay.style.display = 'none';
         mainApp.classList.remove('dashboard-hidden');
@@ -16,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function checkPassword() {
         if (passwordInput.value === CORRECT_PASSWORD) {
-            sessionStorage.setItem('hw_radar_auth', 'true'); // Sauvegarde la session
+            sessionStorage.setItem('hw_radar_auth', 'true');
             loginOverlay.style.display = 'none';
             mainApp.classList.remove('dashboard-hidden');
         } else {
@@ -29,42 +28,50 @@ document.addEventListener('DOMContentLoaded', () => {
     passwordInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') checkPassword();
     });
+
+    // NOUVEAU : Chargement initial des données au démarrage
+    loadData();
 });
 
-const baseFeeds = [
-    'https://www.pv-magazine.fr/feed/', 
-    'https://energynews.pro/fr/feed/',
-    'https://www.maddyness.com/feed/',
-    'https://www.greenunivers.com/feed/',
-    'https://techcrunch.com/category/greentech/feed/',
-    'https://sifted.eu/feed/',
-    'https://www.lesechos.fr/rss/tech-medias',
-    'https://cleantechnica.com/feed/',
-    'https://www.transition-energies.com/feed/'
-];
-
-const feeds = [];
-const profondeur = 10; 
-
-baseFeeds.forEach(url => {
-    for (let i = 1; i <= profondeur; i++) {
-        if (i === 1) feeds.push(url);
-        else feeds.push(`${url}${url.includes('?') ? '&' : '?'}paged=${i}`);
-    }
-});
-
+// --- GESTION DES DONNÉES ---
 let allArticles = [];
-let feedsProcessed = 0;
 let currentSearchType = 'all';
 
-document.getElementById('btn-levee').addEventListener('click', () => startSearch('levee'));
-document.getElementById('btn-ma').addEventListener('click', () => startSearch('ma'));
-document.getElementById('btn-all').addEventListener('click', () => startSearch('all'));
+document.getElementById('btn-levee').addEventListener('click', () => displaySearch('levee'));
+document.getElementById('btn-ma').addEventListener('click', () => displaySearch('ma'));
+document.getElementById('btn-all').addEventListener('click', () => displaySearch('all'));
+document.getElementById('time-filter').addEventListener('change', () => displaySearch(currentSearchType));
 
-function startSearch(type) {
+function loadData() {
+    const loadingDiv = document.getElementById('loading');
+    const tbody = document.getElementById('results-body');
+    
+    loadingDiv.style.display = 'block';
+    loadingDiv.textContent = "Chargement de la base de données...";
+    
+    // On lit le fichier généré par le robot chaque matin
+    fetch('data.json')
+        .then(response => {
+            if (!response.ok) throw new Error("Fichier data.json introuvable. Le robot doit tourner au moins une fois !");
+            return response.json();
+        })
+        .then(data => {
+            loadingDiv.style.display = 'none';
+            // On convertit les dates texte en vrais objets Date JavaScript
+            allArticles = data.map(article => ({
+                ...article,
+                date: new Date(article.date)
+            }));
+            displaySearch('all'); // Affiche tout par défaut au lancement
+        })
+        .catch(error => {
+            loadingDiv.textContent = error.message;
+            loadingDiv.style.color = "red";
+        });
+}
+
+function displaySearch(type) {
     currentSearchType = type;
-    allArticles = [];
-    feedsProcessed = 0;
     
     const timeFilter = document.getElementById('time-filter').value;
     const now = new Date();
@@ -74,155 +81,33 @@ function startSearch(type) {
         limitDate.setDate(now.getDate() - parseInt(timeFilter));
     }
     
-    const loadingDiv = document.getElementById('loading');
     const tbody = document.getElementById('results-body');
-    
-    loadingDiv.style.display = 'block';
-    loadingDiv.textContent = `Exploration des opérations : 0 / ${feeds.length} requêtes...`;
     tbody.innerHTML = ''; 
 
-    feeds.forEach((feed, index) => {
-        setTimeout(() => {
-            const script = document.createElement('script');
-            const callbackName = 'processRSS_' + index;
-            
-            window[callbackName] = function(data) {
-                feedsProcessed++;
-                loadingDiv.textContent = `Exploration des opérations : ${feedsProcessed} / ${feeds.length} requêtes...`;
+    // Mots-clés pour différencier Levées et M&A à l'affichage
+    const regexLevee = /(lève|levée|fonds|financement|millions?|milliards?|série|investit|raises|funding|series|secures|amorçage|seed|capital|tour de table|clôture|backing|backed|grant|subvention|dette|crowdfunding|ipo|papernest|selectra)/i;
+    const regexMA = /(rachète|acquisition|acquiert|fusion|rachat|partenariat|passent chez|acquires|merger|buys|merges|s'offre|rejoint|absorbe|takeover|stake|participation|alliance|associe|joint venture|buyout|spin-off|reprend|intégration)/i;
 
-                if (data.status === 'ok') {
-                    data.items.forEach(item => {
-                        const articleDate = new Date(item.pubDate);
-                        if (articleDate < limitDate) return; 
-
-                        const titleLower = item.title.toLowerCase();
-                        const descriptionLower = (item.description || "").toLowerCase();
-                        const texteGlobal = titleLower + " " + descriptionLower;
-                        
-                        let isRelevant = false;
-
-                        const regexLevee = /(lève|levée|fonds|financement|millions?|milliards?|série|investit|raises|funding|series|secures|amorçage|seed|capital|tour de table|clôture|backing|backed|grant|subvention|dette|crowdfunding|ipo|Papernest|Selectra)/;
-                        const regexMA = /(rachète|acquisition|acquiert|fusion|rachat|partenariat|passent chez|acquires|merger|buys|merges|s'offre|rejoint|absorbe|takeover|stake|participation|alliance|associe|joint venture|buyout|spin-off|reprend|intégration)/;
-
-                        // NOUVEAU COMPORTEMENT POUR "VOIR TOUT" : On cherche Levées OU M&A
-                        if (currentSearchType === 'all' && (titleLower.match(regexLevee) || titleLower.match(regexMA))) {
-                            isRelevant = true;
-                        } else if (currentSearchType === 'levee' && titleLower.match(regexLevee)) {
-                            isRelevant = true;
-                        } else if (currentSearchType === 'ma' && titleLower.match(regexMA)) {
-                            isRelevant = true;
-                        }
-
-                        if (isRelevant) {
-                            if (titleLower.match(/(nouveau fonds|prépare un fonds|clôture un fonds|salon|coulisses|ipem|baromètre|succès de son fonds|bourse|cac 40|nomination|décès)/)) {
-                                isRelevant = false;
-                            }
-
-                            // Le filtre "secteur strict" s'applique uniquement si on n'est PAS sur "Voir tout"
-                            const isGeneraliste = feed.includes('maddyness') || feed.includes('techcrunch') || feed.includes('sifted') || feed.includes('lesechos');
-                            const motsClefsEnergie = /(énergie|solaire|batterie|flexibilité|rénovation|climat|greentech|cleantech|climatetech|photovoltaïque|stockage d'énergie|transition énergétique|transition écologique|décarbonation|éolien|hydrogène|hydrogen|biogaz|biométhane|réseau électrique|\bgrid\b|efficacité énergétique|éco-mobilité|mobilité électrique|recharge|bornes|renouvelable|renewable|\bwind\b|nuclear|nucléaire|\bev\b|véhicule électrique|\bipp\b)/;
-                            
-                            if (currentSearchType !== 'all' && isGeneraliste && !texteGlobal.match(motsClefsEnergie)) {
-                                isRelevant = false;
-                            }
-                        }
-
-                        if (isRelevant) {
-                            let montant = "-";
-                            let entite = "";
-                            let secteur = "Autre"; 
-
-                            // Détection du secteur (toujours active pour la pastille)
-                            if (texteGlobal.match(/(rénovation|isolation|pompes? à chaleur|\bpac\b|\bdpe\b|bâtiment|efficacité énergétique|thermique|passoire|cpe)/)) secteur = "Rénovation";
-                            else if (texteGlobal.match(/(solaire|photovoltaïque|\bpv\b|panneaux?|agrivoltaïsme|solar|ensoleillement|onduleurs?)/)) secteur = "Solaire";
-                            else if (texteGlobal.match(/(flexibilité|effacement|pilotage|smart grid|\bvpp\b|réseau électrique|\bgrid\b|agrégateur|gestion de l'énergie)/)) secteur = "Flexibilité";
-                            else if (texteGlobal.match(/(batteries?|stockage|\bbess\b|lithium|battery|storage|gigafactory)/)) secteur = "Batterie";
-                            else if (texteGlobal.match(/(énergie|energy|renouvelables?|renewables?|enr|cleantech|greentech|climatetech|éolien|\bwind\b|hydrogène|biométhane|biogaz|nucléaire|transition|décarbonation|\bipp\b|power)/)) secteur = "Énergie";
-
-                            const regexMontant = /(\d+(?:[.,]\d+)?\s*(?:millions?|milliards?|M€|M\$|k€|K€|€|\$|M|B))/i;
-                            const matchMontant = item.title.match(regexMontant);
-                            if (matchMontant) montant = matchMontant[0];
-
-                            const keywords = [' lève ', ' rachète ', ' acquiert ', ' annonce ', ' passent chez ', ' raises ', ' acquires ', ' secures ', " s'offre ", " s'associe ", ' rejoint ', ' fusionne ', ' associe ', ' investit ', ' clôture ', ' lance '];
-                            for (let kw of keywords) {
-                                let indexMot = titleLower.indexOf(kw);
-                                if (indexMot > 0) {
-                                    let texteAvant = item.title.substring(0, indexMot).trim();
-                                    
-                                    if (texteAvant.includes(':')) texteAvant = texteAvant.split(':').pop().trim();
-                                    if (texteAvant.includes(',')) texteAvant = texteAvant.split(',')[0].trim(); 
-                                    if (texteAvant.includes('-')) texteAvant = texteAvant.split('-').pop().trim(); 
-                                    
-                                    texteAvant = texteAvant.replace(/^(la|le|les|un|une)\s+(start-up|startup|fintech|société|pépite|entreprise|scale-up|groupe)\s+/ig, '').trim();
-                                    texteAvant = texteAvant.replace(/^(la|le|les|un|une)\s+/ig, '').trim();
-                                    
-                                    let nombreDeMots = texteAvant.split(' ').length;
-                                    if(texteAvant.length > 0 && nombreDeMots <= 4 && texteAvant.length < 35) {
-                                        entite = texteAvant.charAt(0).toUpperCase() + texteAvant.slice(1);
-                                    }
-                                    break;
-                                }
-                            }
-
-                            let doublon = allArticles.find(a => a.entite.toLowerCase() === entite.toLowerCase() && entite !== "");
-                            
-                            if (!doublon) {
-                                let sourceName = 'Source';
-                                if (feed.includes('pv-mag')) sourceName = 'PV Mag';
-                                else if (feed.includes('energynews')) sourceName = 'EnergyNews';
-                                else if (feed.includes('maddyness')) sourceName = 'Maddyness';
-                                else if (feed.includes('greenunivers')) sourceName = 'GreenUnv.';
-                                else if (feed.includes('techcrunch')) sourceName = 'TechCrunch';
-                                else if (feed.includes('sifted')) sourceName = 'Sifted';
-                                else if (feed.includes('lesechos')) sourceName = 'Les Echos';
-                                else if (feed.includes('cleantechnica')) sourceName = 'CleanTech';
-                                else if (feed.includes('transition')) sourceName = 'Transition En.';
-
-                                allArticles.push({ 
-                                    title: item.title, 
-                                    link: item.link, 
-                                    date: articleDate,
-                                    source: sourceName,
-                                    entite: entite,
-                                    montant: montant,
-                                    secteur: secteur 
-                                });
-                            }
-                        }
-                    });
-                }
-                checkIfDone();
-            };
-
-            script.onerror = function() { 
-                feedsProcessed++; 
-                checkIfDone(); 
-            };
-            
-            script.src = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}&api_key=7hx3axa9vy3wvqrkbagpoehv4odhxnafyslmpidn&callback=${callbackName}`;
-            document.body.appendChild(script);
-
-        }, index * 1000); 
+    // On filtre la base de données selon le bouton cliqué et la date
+    let filteredArticles = allArticles.filter(article => {
+        if (article.date < limitDate) return false;
+        
+        const titleLower = article.title.toLowerCase();
+        if (currentSearchType === 'levee' && !titleLower.match(regexLevee)) return false;
+        if (currentSearchType === 'ma' && !titleLower.match(regexMA)) return false;
+        
+        return true;
     });
-}
 
-function checkIfDone() {
-    if (feedsProcessed === feeds.length) displayResults();
-}
+    // Tri par date décroissante
+    filteredArticles.sort((a, b) => b.date - a.date);
 
-function displayResults() {
-    const loadingDiv = document.getElementById('loading');
-    const tbody = document.getElementById('results-body');
-    
-    loadingDiv.style.display = 'none';
-    allArticles.sort((a, b) => b.date - a.date);
-
-    if (allArticles.length === 0) {
+    if (filteredArticles.length === 0) {
         tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted); padding: 30px;">Aucune opération trouvée avec ces filtres.</td></tr>`;
         return;
     }
 
-    allArticles.forEach(article => {
+    filteredArticles.forEach(article => {
         const tr = document.createElement('tr');
         const dateStr = article.date.toLocaleDateString('fr-FR', { month: 'short', day: 'numeric', year: 'numeric' });
         
@@ -257,22 +142,19 @@ const spanClose = document.getElementsByClassName('close-modal')[0];
 btnReadme.addEventListener('click', () => {
     modal.style.display = 'block';
     
-    // On va chercher le fichier README.md à la racine du projet
     fetch('README.md')
         .then(response => {
             if(!response.ok) throw new Error("Fichier introuvable");
             return response.text();
         })
         .then(text => {
-            // marked.parse() convertit le texte brut en HTML formaté
             document.getElementById('readme-content').innerHTML = marked.parse(text);
         })
         .catch(err => {
-            document.getElementById('readme-content').innerHTML = "<p style='color:red;'>Erreur : Le fichier README.md n'a pas pu être chargé. Assurez-vous qu'il est présent sur le dépôt GitHub.</p>";
+            document.getElementById('readme-content').innerHTML = "<p style='color:red;'>Erreur : Le fichier README.md n'a pas pu être chargé.</p>";
         });
 });
 
-// Fermeture de la modale au clic sur la croix ou en dehors de la fenêtre
 spanClose.onclick = () => modal.style.display = 'none';
 window.onclick = (event) => {
     if (event.target === modal) modal.style.display = 'none';
