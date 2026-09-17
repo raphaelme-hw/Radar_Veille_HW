@@ -1,0 +1,39 @@
+name: Mise a jour quotidienne du Radar
+
+on:
+  schedule:
+    # Tous les jours à 4h00 UTC (soit 6h00 heure de Paris)
+    - cron: '0 4 * * *'
+  # La ligne ci-dessous permet de lancer le robot manuellement pour tester
+  workflow_dispatch: 
+
+permissions:
+  # Autorise le robot à enregistrer le nouveau fichier data.json sur ton dépôt
+  contents: write 
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      - name: Préparation de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Installation des outils (rss-parser)
+        run: npm install
+
+      - name: Lancement du script de collecte
+        run: npm start
+
+      - name: Sauvegarde des résultats
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "Mise à jour automatique des données"
+          git push
