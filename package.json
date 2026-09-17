@@ -1,0 +1,12 @@
+{
+  "name": "radar-hello-watt-scraper",
+  "version": "1.0.0",
+  "description": "Script d'extraction quotidienne pour le radar M&A",
+  "main": "scraper.js",
+  "scripts": {
+    "start": "node scraper.js"
+  },
+  "dependencies": {
+    "rss-parser": "^3.13.0"
+  }
+}
