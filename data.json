@@ -1,5 +1,104 @@
 [
   {
+    "title": "Europe Paying €200 Million A Day Diesel Premium, Report Shows",
+    "link": "https://cleantechnica.com/2026/09/22/europe-paying-e200-million-a-day-diesel-premium-report-shows/",
+    "date": "2026-09-23T00:36:03.000Z",
+    "source": "CleanTech",
+    "entite": "",
+    "montant": "200 Million",
+    "secteur": "Énergie"
+  },
+  {
+    "title": "L'Inde accueille un investissement de 100 millions de dollars de Norfund dans AMPIN",
+    "link": "https://energynews.pro/linde-accueille-un-investissement-de-100-millions-de-dollars-de-norfund-dans-ampin",
+    "date": "2026-09-22T22:06:17.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "100 millions",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Generate Capital cède sa plateforme de méthanisation à Pinta Energy et Vanguard Renewables",
+    "link": "https://energynews.pro/generate-capital-cede-sa-plateforme-de-methanisation-a-pinta-energy-et-vanguard-renewables",
+    "date": "2026-09-22T21:32:47.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "-",
+    "secteur": "Énergie"
+  },
+  {
+    "title": "nT-Tao et Orion Nuclear Energy visent 20 MW de fusion aux États-Unis",
+    "link": "https://energynews.pro/nt-tao-et-orion-nuclear-energy-visent-20-mw-de-fusion-aux-etats-unis",
+    "date": "2026-09-22T20:31:08.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "20 M",
+    "secteur": "Énergie"
+  },
+  {
+    "title": "Zeo Energy et Ewyze s'associent pour des data centers hors réseau",
+    "link": "https://energynews.pro/zeo-energy-et-ewyze-sassocient-pour-des-data-centers-hors-reseau",
+    "date": "2026-09-22T19:31:18.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "-",
+    "secteur": "Énergie"
+  },
+  {
+    "title": "Fervo Energy reçoit 20 millions $ du DOE pour l'Idaho et le Nevada",
+    "link": "https://energynews.pro/fervo-energy-recoit-20-millions-du-doe-pour-lidaho-et-le-nevada",
+    "date": "2026-09-22T19:02:09.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "20 millions",
+    "secteur": "Énergie"
+  },
+  {
+    "title": "Véhicules électriques : Sorégies acquiert les stations de recharge de BP",
+    "link": "https://www.greenunivers.com/2026/09/vehicules-electriques-soregies-acquiert-les-stations-de-recharge-de-bp-433827/",
+    "date": "2026-09-22T15:32:58.000Z",
+    "source": "GreenUnv.",
+    "entite": "Sorégies",
+    "montant": "-",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Le Nigeria lance un fonds de 300 M$ pour l'énergie décentralisée",
+    "link": "https://energynews.pro/le-nigeria-lance-un-fonds-de-300-m-pour-lenergie-decentralisee",
+    "date": "2026-09-22T14:03:02.000Z",
+    "source": "EnergyNews",
+    "entite": "Nigeria",
+    "montant": "300 M$",
+    "secteur": "Énergie"
+  },
+  {
+    "title": "Les États-Unis proposeraient un fonds de 5 milliards de dollars pour le Golfe",
+    "link": "https://energynews.pro/les-etats-unis-proposeraient-un-fonds-de-5-milliards-de-dollars-pour-le-golfe",
+    "date": "2026-09-22T13:32:35.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "5 milliards",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Le Venezuela discute dette et pétrole avec les institutions financières à New York",
+    "link": "https://energynews.pro/le-venezuela-discute-dette-et-petrole-avec-les-institutions-financieres-a-new-york",
+    "date": "2026-09-22T12:02:14.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "-",
+    "secteur": "Autre"
+  },
+  {
+    "title": "EDF Power Solutions boucle le financement de son projet solaire géant Utah Solar 1 aux États-Unis",
+    "link": "https://www.pv-magazine.fr/2026/09/22/edf-power-solutions-boucle-le-financement-de-son-projet-solaire-geant-utah-solar-1-aux-etats-unis/",
+    "date": "2026-09-22T12:00:00.000Z",
+    "source": "PV Mag",
+    "entite": "",
+    "montant": "-",
+    "secteur": "Solaire"
+  },
+  {
     "title": "La BEI et Crédit Agricole CIB engagent 600 millions d'euros dans les réseaux",
     "link": "https://energynews.pro/la-bei-et-credit-agricole-cib-engagent-600-millions-deuros-dans-les-reseaux",
     "date": "2026-09-22T06:01:07.000Z",
