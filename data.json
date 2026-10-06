@@ -1,5 +1,122 @@
 [
   {
+    "title": "Air Liquide lance un rachat d'actions de 4 milliards d'euros pour 2027-2028",
+    "link": "https://energynews.pro/air-liquide-lance-un-rachat-dactions-de-4-milliards-deuros-pour-2027-2028",
+    "date": "2026-10-06T03:49:25.000Z",
+    "source": "EnergyNews",
+    "entite": "Air Liquide",
+    "montant": "4 milliards",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Condor relève son financement à 70 M CAD pour l'Ouzbékistan et le Kazakhstan",
+    "link": "https://energynews.pro/condor-releve-son-financement-a-70-m-cad-pour-louzbekistan-et-le-kazakhstan",
+    "date": "2026-10-06T03:04:42.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "70 M",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Linea Energy boucle le financement du stockage Mesa View de 250 MW au Texas",
+    "link": "https://energynews.pro/linea-energy-boucle-le-financement-du-stockage-mesa-view-de-250-mw-au-texas",
+    "date": "2026-10-06T02:34:15.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "250 M",
+    "secteur": "Batterie"
+  },
+  {
+    "title": "CIP investit plus de 270 M€ dans le stockage par batteries de Kilmarnock South en Écosse",
+    "link": "https://energynews.pro/cip-investit-plus-de-270-m-dans-le-stockage-par-batteries-de-kilmarnock-south-en-ecosse",
+    "date": "2026-10-06T01:34:25.000Z",
+    "source": "EnergyNews",
+    "entite": "CIP",
+    "montant": "270 M€",
+    "secteur": "Batterie"
+  },
+  {
+    "title": "Le Canada vise 1 million de bbl/j d'exportations supplémentaires avec Pacific Link",
+    "link": "https://energynews.pro/le-canada-vise-1-million-de-bblj-dexportations-supplementaires-avec-pacific-link",
+    "date": "2026-10-06T01:04:23.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "1 million",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Suncor cède ses actifs offshore de Terre-Neuve à Ithaca Energy pour 1,2 milliard de dollars canadiens",
+    "link": "https://energynews.pro/suncor-cede-ses-actifs-offshore-de-terre-neuve-a-ithaca-energy-pour-12-milliard-de-dollars-canadiens",
+    "date": "2026-10-05T23:04:07.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "1,2 milliard",
+    "secteur": "Énergie"
+  },
+  {
+    "title": "Alfa Laval engage l'intégration complète de Desmet dans les huiles, graisses et biocarburants",
+    "link": "https://energynews.pro/alfa-laval-engage-lintegration-complete-de-desmet-dans-les-huiles-graisses-et-biocarburants",
+    "date": "2026-10-05T22:04:04.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "-",
+    "secteur": "Autre"
+  },
+  {
+    "title": "L'Irak annonce le transport de 2 millions de barils de brut au-delà d'Ormuz",
+    "link": "https://energynews.pro/lirak-annonce-le-transport-de-2-millions-de-barils-de-brut-au-dela-dormuz",
+    "date": "2026-10-05T20:04:24.000Z",
+    "source": "EnergyNews",
+    "entite": "L'Irak",
+    "montant": "2 millions",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Glenfarne défend la compétitivité d'Alaska LNG face aux critiques sur son financement",
+    "link": "https://energynews.pro/glenfarne-defend-la-competitivite-dalaska-lng-face-aux-critiques-sur-son-financement",
+    "date": "2026-10-05T18:04:37.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "-",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Les États-Unis envisagent 4 milliards $ de prêt pour l'uprate de Vistra",
+    "link": "https://energynews.pro/les-etats-unis-envisagent-4-milliards-de-pret-pour-luprate-de-vistra",
+    "date": "2026-10-05T16:34:24.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "4 milliards",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Des entrepreneurs polonais investissent 500 millions PLN dans les SMR BWRX-300 de SGE",
+    "link": "https://energynews.pro/des-entrepreneurs-polonais-investissent-500-millions-pln-dans-les-smr-bwrx-300-de-sge",
+    "date": "2026-10-05T16:04:24.000Z",
+    "source": "EnergyNews",
+    "entite": "",
+    "montant": "500 millions",
+    "secteur": "Autre"
+  },
+  {
+    "title": "Une start-up allemande obtient une subvention pour une batterie domestique sodium-ion rechargeable sur le réseau",
+    "link": "https://www.pv-magazine.fr/2026/10/05/une-start-up-allemande-obtient-une-subvention-pour-une-batterie-domestique-sodium-ion-rechargeable-sur-le-reseau/",
+    "date": "2026-10-05T06:30:00.000Z",
+    "source": "PV Mag",
+    "entite": "",
+    "montant": "-",
+    "secteur": "Solaire"
+  },
+  {
+    "title": "Enervivo, Épopée Gestion et Urbeez s’associent pour investir dans le biométhane",
+    "link": "https://www.greenunivers.com/2026/10/enervivo-epopee-gestion-et-urbeez-sassocient-pour-investir-dans-le-biomethane-434705/",
+    "date": "2026-10-05T05:00:00.000Z",
+    "source": "GreenUnv.",
+    "entite": "",
+    "montant": "-",
+    "secteur": "Énergie"
+  },
+  {
     "title": "Iberdrola élargit son alliance avec GIC dans le transport électrique au Brésil",
     "link": "https://energynews.pro/iberdrola-elargit-son-alliance-avec-gic-dans-le-transport-electrique-au-bresil",
     "date": "2026-10-02T16:04:14.000Z",
